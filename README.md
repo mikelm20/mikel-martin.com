@@ -4,9 +4,7 @@ Personal site of Mikel Martin. Static HTML in `site/`, hosted on Vercel.
 
 ## Deploy
 
-    vercel --prod
-
-That is the whole release process. `vercel.json` sets the output directory, clean URLs, cache headers for `/media`, and security headers.
+Push to `main`. The Vercel Git integration builds and deploys it; nothing runs on GitHub Actions. `vercel --prod` from the repo deploys the working tree directly if ever needed. `vercel.json` sets the output directory, clean URLs, cache headers for `/media`, and security headers.
 
 ## Layout
 
