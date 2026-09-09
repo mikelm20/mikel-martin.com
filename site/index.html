@@ -172,7 +172,7 @@
   .intro.is-gone { pointer-events: none; }
   .spacer { height: calc(100svh - 22rem); }
   .band { position: relative; z-index: 3; height: 22rem; min-height: 0; background: none; }
-  .band::after { background: linear-gradient(180deg, rgba(11,15,20,0) 0%, rgba(11,15,20,0.15) 45%, var(--bg) 100%); }
+  .band::after { background: linear-gradient(180deg, rgba(11,15,20,0) 0%, rgba(11,15,20,0.15) 45%, var(--bg) 100%); opacity: var(--p, 0); }
   .band { scroll-margin-top: 0; }
   .band .top, .band .id { opacity: 0; transition: opacity 0.25s linear; }
   .band.is-on .top, .band.is-on .id { opacity: 1; }
@@ -526,6 +526,7 @@
       var range = Math.max(1, spacer.offsetHeight);
       var p = Math.min(1, Math.max(0, window.scrollY / range));
       intro.style.opacity = String(1 - Math.min(1, p * 1.6));
+      band.style.setProperty('--p', String(Math.min(1, Math.max(0, (p - 0.35) / 0.5))));
       intro.style.transform = 'translateY(' + (-p * 60) + 'px)';
       intro.classList.toggle('is-gone', p > 0.6);
       band.classList.toggle('is-on', p > 0.55);
