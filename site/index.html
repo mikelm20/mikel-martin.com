@@ -13,186 +13,524 @@
 <style>
   :root {
     --bg: #0b0f14;
+    --bg-2: #10161e;
+    --panel: rgba(255, 255, 255, 0.035);
     --fg: #f2f4f7;
-    --muted: rgba(242, 244, 247, 0.72);
-    --line: rgba(242, 244, 247, 0.18);
-    --accent: #8ec5ff;
+    --muted: rgba(242, 244, 247, 0.66);
+    --line: rgba(242, 244, 247, 0.14);
+    --blue: #8ec5ff;
+    --violet: #b8a4ff;
+    --teal: #5fd4c4;
+    --amber: #ffc46b;
+    --green: #8fd694;
+    --rose: #ff8fa3;
     color-scheme: dark;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--fg); }
   body {
-    font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
   a { color: inherit; text-decoration: none; }
-  a:hover { color: var(--accent); }
+  a:hover { color: var(--blue); }
+  .wrap { width: min(100% - 3rem, 68rem); margin: 0 auto; }
 
-  /* Hero: full-viewport video over a poster fallback */
-  .hero {
+  /* Header band */
+  .band {
     position: relative;
-    min-height: 100svh;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
     isolation: isolate;
-  }
-  .hero__media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    background: var(--bg) url("/media/hero-poster.jpg") center / cover no-repeat;
-  }
-  .hero__media video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.6s ease;
-  }
-  .hero__media video.is-ready { opacity: 1; }
-  .hero__shade {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(180deg, rgba(11, 15, 20, 0.35) 0%, rgba(11, 15, 20, 0.15) 40%, rgba(11, 15, 20, 0.78) 100%),
-      radial-gradient(60% 50% at 50% 55%, rgba(11, 15, 20, 0.35), transparent 70%);
-  }
-  .hero__inner {
-    width: min(100% - 3rem, 64rem);
-    padding: 6rem 0;
-    text-align: center;
-  }
-  .hero h1 {
-    margin: 0 0 0.6rem;
-    font-size: clamp(2.6rem, 7vw, 5.5rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
-  }
-  .hero p.lede {
-    margin: 0 auto 2rem;
-    max-width: 38rem;
-    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-    color: var(--muted);
-    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
-  }
-  .links {
+    background: var(--bg) url("/media/hero-poster.jpg") center 35% / cover no-repeat;
+    min-height: 22rem;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
+    flex-direction: column;
   }
-  .links a {
-    padding: 0.7rem 1.2rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: rgba(11, 15, 20, 0.35);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    font-size: 0.95rem;
-    transition: border-color 0.2s, background 0.2s;
+  .band::after {
+    content: "";
+    position: absolute; inset: 0; z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(11,15,20,0.55) 0%, rgba(11,15,20,0.25) 45%, var(--bg) 100%);
   }
-  .links a:hover { border-color: var(--accent); background: rgba(11, 15, 20, 0.55); }
-  .links a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-  .links a.primary:hover { background: var(--accent); border-color: var(--accent); }
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 0; font-size: 0.92rem; color: var(--muted);
+  }
+  .top a:first-child { color: var(--fg); font-weight: 600; }
+  .top nav a + a { margin-left: 1.3rem; }
+  .id { margin-top: auto; padding: 2.5rem 0 2rem; display: flex; align-items: flex-end; gap: 2rem; flex-wrap: wrap; }
+  .id h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 650; letter-spacing: -0.025em; line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+  .id .role { margin: 0.5rem 0 0; font-size: 1.2rem; color: var(--fg); opacity: 0.9; }
+  .id .meta { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  .pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-left: auto; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.5rem 0.95rem; border-radius: 999px; font-size: 0.9rem;
+    border: 1px solid var(--line); background: rgba(11,15,20,0.45);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .pill svg { width: 14px; height: 14px; }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
+  /* Layout */
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) 19rem; gap: 3.5rem; padding: 2.5rem 0 5rem; }
+  h2 { display: block; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.1rem; font-weight: 500; }
+  section + section { margin-top: 2.8rem; }
+  p { margin: 0 0 0.9rem; }
+  .summary { font-size: 1.08rem; line-height: 1.6; }
+  .summary em { font-style: normal; color: var(--blue); }
+
+  /* Timeline */
+  .timeline { position: relative; margin: 0; padding: 0; list-style: none; }
+  .job { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.4rem; padding: 1.6rem 0; border-top: 1px solid var(--line); }
+  .job:first-child { border-top: 0; padding-top: 0; }
+  .logo {
+    width: 6.5rem; height: 3.6rem; border-radius: 10px; background: #fff; padding: 0.5rem 0.6rem;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .logo.wide { padding: 0.15rem 0.3rem; }
+  .logo.tall { padding: 0.2rem 0.6rem; }
+  .logo.txt { background: var(--panel); border: 1px solid var(--line); color: var(--fg); font-weight: 650; font-size: 0.85rem; letter-spacing: 0.06em; }
+  .job header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; }
+  .job h3 { margin: 0; font-size: 1.1rem; font-weight: 650; }
+  .job .org { color: var(--muted); font-weight: 500; }
+  .job .org a { border-bottom: 1px solid currentColor; }
+  .job .org a:hover { color: var(--fg); }
+  .job .when { width: 100%; color: var(--muted); font-size: 0.9rem; }
+  .job ul { margin: 0.7rem 0 0; padding-left: 1.1rem; }
+  .job li { margin: 0.35rem 0; }
+  .job li::marker { color: var(--muted); }
+  .stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+
+  /* Chips */
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.28rem 0.6rem; border-radius: 8px; font-size: 0.82rem;
+    background: var(--panel); border: 1px solid var(--line); color: var(--fg);
+    white-space: nowrap;
+  }
+  .chip img, .chip svg { width: 14px; height: 14px; display: block; }
+  .chip.txt { color: var(--muted); }
+
+  /* Aside */
+  aside .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.25rem; }
+  aside .card + .card { margin-top: 1.2rem; }
+  aside h2 { margin-bottom: 0.9rem; }
+  .group { margin-top: 0.9rem; }
+  .group:first-of-type { margin-top: 0; }
+  .group h4 { margin: 0 0 0.45rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+  .group .stack { margin-top: 0; }
+  .edu { display: grid; grid-template-columns: 4.6rem 1fr; gap: 0.9rem; align-items: start; }
+  .edu + .edu { margin-top: 1.1rem; }
+  .edu .logo { width: 4.6rem; height: 2.8rem; padding: 0.35rem 0.45rem; border-radius: 8px; }
+  .edu strong { display: block; font-weight: 600; line-height: 1.3; }
+  .edu span { color: var(--muted); font-size: 0.88rem; display: block; margin-top: 0.15rem; }
+  .facts { list-style: none; margin: 0; padding: 0; }
+  .facts li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
+  .facts li:first-child { border-top: 0; padding-top: 0; }
+  .facts li span:first-child { color: var(--muted); }
+  .bars { list-style: none; margin: 0; padding: 0; }
+  .bars li { margin: 0.55rem 0; font-size: 0.92rem; }
+  .bars .bar { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); margin-top: 0.3rem; overflow: hidden; }
+  .bars .bar i { display: block; height: 100%; border-radius: inherit; background: var(--blue); opacity: 0.8; }
+
+  footer { color: var(--muted); font-size: 0.85rem; padding: 0 0 3rem; }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .pills { margin-left: 0; }
   }
 
-  /* Content */
-  main { width: min(100% - 3rem, 44rem); margin: 0 auto; padding: 5rem 0 6rem; }
-  section + section { margin-top: 4rem; }
-  h2 { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.2rem; font-weight: 500; }
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
-  .facts li { padding: 1.1rem 1.2rem; border: 1px solid var(--line); border-radius: 12px; }
-  .facts strong { display: block; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; }
-  .facts span { color: var(--muted); font-size: 0.92rem; }
-  .projects { list-style: none; margin: 0; padding: 0; }
-  .projects li { padding: 1.1rem 0; border-top: 1px solid var(--line); }
-  .projects li:last-child { border-bottom: 1px solid var(--line); }
-  .projects strong { display: block; margin-bottom: 0.15rem; }
-  .projects span { color: var(--muted); }
-  footer { width: min(100% - 3rem, 44rem); margin: 0 auto; padding: 0 0 3rem; color: var(--muted); font-size: 0.85rem; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__media video { display: none; }
+  @media print {
+    :root { --bg: #fff; --bg-2: #fff; --panel: #f4f6f8; --fg: #111; --muted: #555; --line: #d8dde3; --blue: #1f5fbf; --violet: #6b4fd8; --teal: #1a9c8c; --amber: #b7791f; --green: #2f8f4e; --rose: #c2405a; color-scheme: light; }
+    body { font-size: 10.5pt; line-height: 1.4; }
+    .band { background-image: none; min-height: 0; }
+    .band::after { display: none; }
+    .top, .pills { display: none; }
+    .id h1 { text-shadow: none; font-size: 24pt; }
+    .grid { gap: 2rem; padding: 1rem 0 0; }
+    .logo { border: 1px solid var(--line); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section { break-inside: avoid; }
   }
+
+  /* Root page: fixed video background, hero intro, sticky band */
+  html { scroll-behavior: smooth; }
+  .bg { position: fixed; inset: 0; z-index: 0; background: var(--bg) url("/media/hero-poster.jpg") center / cover no-repeat; }
+  .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
+  .bg video.is-ready { opacity: 1; }
+  .bg .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,15,20,0.35) 0%, rgba(11,15,20,0.15) 40%, rgba(11,15,20,0.55) 100%); }
+  .intro { position: fixed; inset: 0; z-index: 1; display: grid; place-items: center; text-align: center; padding: 0 1.5rem; will-change: opacity, transform; }
+  .intro h1 { margin: 0 0 0.6rem; font-size: clamp(2.6rem, 7vw, 5.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; text-shadow: 0 2px 24px rgba(0,0,0,0.45); }
+  .intro .lede { margin: 0 auto 2rem; max-width: 38rem; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .intro .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .intro .links a { padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(11,15,20,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 0.95rem; }
+  .intro .links a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .intro .links a.primary:hover { background: var(--blue); border-color: var(--blue); }
+  .intro .hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .intro.is-gone { pointer-events: none; }
+  .spacer { height: calc(100svh - 22rem); }
+  .band { position: relative; z-index: 3; height: 22rem; min-height: 0; background: none; }
+  .band::after { background: linear-gradient(180deg, rgba(11,15,20,0) 0%, rgba(11,15,20,0.15) 45%, var(--bg) 100%); }
+  .band { scroll-margin-top: 0; }
+  .band .top, .band .id { opacity: 0; transition: opacity 0.25s linear; }
+  .band.is-on .top, .band.is-on .id { opacity: 1; }
+  .sheet { position: relative; z-index: 2; background: var(--bg); }
+  .sheet .grid { padding-top: 1.5rem; }
+  @media (max-width: 900px) { .spacer { height: calc(100svh - 24rem); } .band { height: 24rem; } }
+  @media (prefers-reduced-motion: reduce) { .bg video { display: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero__media" aria-hidden="true">
-    <video id="hero-video" muted playsinline loop autoplay preload="metadata" poster="/media/hero-poster.jpg" disablepictureinpicture>
-      <source src="/media/hero-2160.mp4" type="video/mp4" media="(min-width: 1921px)">
-      <source src="/media/hero-1080.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="hero__shade" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true">
+  <video id="hero-video" muted playsinline loop autoplay preload="metadata" poster="/media/hero-poster.jpg" disablepictureinpicture>
+    <source src="/media/hero-2160.mp4" type="video/mp4" media="(min-width: 1921px)">
+    <source src="/media/hero-1080.mp4" type="video/mp4">
+  </video>
+  <div class="shade"></div>
+</div>
 
-  <div class="hero__inner">
+<div class="intro" id="intro">
+  <div>
     <h1>Mikel Martin</h1>
     <p class="lede">Telecom engineer turned platform engineer. Runs infrastructure, builds with AI agents.</p>
     <nav class="links" aria-label="Primary">
-      <a class="primary" href="#projects">Projects</a>
+      <a class="primary" href="#band">About me</a>
       <a href="https://github.com/mikelm20" rel="me">GitHub</a>
-      <a href="https://www.linkedin.com/in/mikelm20" rel="me">LinkedIn</a>
-      <a href="/cv">CV</a>
     </nav>
   </div>
-  <div class="scroll-hint" aria-hidden="true">Scroll</div>
+  <div class="hint" aria-hidden="true">Scroll</div>
+</div>
+
+<div class="spacer" aria-hidden="true"></div>
+
+<header class="band" id="band">
+  <div class="wrap top">
+    <a href="/">Mikel Martin</a>
+    <nav>
+      <a href="https://github.com/mikelm20" rel="me">GitHub</a>
+    </nav>
+  </div>
+  <div class="wrap id">
+    <div>
+      <h1>Mikel Martin</h1>
+      <p class="role">DevOps / Platform Engineer</p>
+      <p class="meta">Bilbao, Spain. Remote-friendly. Contact through GitHub.</p>
+    </div>
+    <div class="pills">
+      <a class="pill" href="https://github.com/mikelm20" rel="me"><img src="/icons/git.svg" alt="" width="14" height="14"> github.com/mikelm20</a>
+    </div>
+  </div>
 </header>
 
+<div class="sheet" id="about">
+<div class="wrap grid">
 <main>
-  <section id="about">
-    <h2>In numbers</h2>
-    <ul class="facts">
-      <li><strong>45 min to 60 s</strong><span>deploy time for a small software team</span></li>
-      <li><strong>30 TB to 5 TB</strong><span>backup footprint across 20 clusters</span></li>
-      <li><strong>3.2 s</strong><span>Firecracker cold boot per session</span></li>
-    </ul>
+  <section id="summary">
+    <h2>Summary</h2>
+    <p class="summary">Platform and DevOps engineer with a telecom background and six years across <em>mission-critical</em>, <em>telco</em> and <em>small software teams</em>. Infrastructure as code, CI/CD, containers on cloud and bare metal, observability, and backups that get restored. Since 2025, building and operating systems where AI coding agents are part of the runtime: <em>sandboxed agent execution</em> in Firecracker microVMs, agents that repair CI, and headless agent workers behind job queues.</p>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul class="projects">
-      <li><strong><a href="https://github.com/mikelm20/learn-platform">learn-platform</a></strong><span>A Firecracker microVM per browser tab running a real Claude Code session. Jailer, custom seccomp, nftables egress allowlist.</span></li>
-      <li><strong><a href="https://github.com/mikelm20/devops-guardian">devops-guardian</a></strong><span>Keeps main green without a human: dispatches headless agents at red CI and trusts only the CI verdict.</span></li>
-      <li><strong><a href="https://github.com/mikelm20/devops-agent">devops-agent</a></strong><span>Go fleet agent that only ever dials out over WireGuard. Signed self-update with rollback, no shell.</span></li>
-      <li><strong>cortex</strong><span>Always-on agent orchestration on a Raspberry Pi. Event-sourced dispatch, worktree isolation, cost tracking.</span></li>
-    </ul>
+  <section id="experience">
+    <h2>Experience</h2>
+    <ol class="timeline">
+
+      <li class="job">
+        <div class="logo tall"><img src="/logos/keni.png" alt="Keni Engineering"></div>
+        <div>
+          <header>
+            <h3>Founder, DevOps consultant</h3>
+            <span class="org"><a href="https://kenitech.io" rel="noopener">Keni Engineering, kenitech.io</a></span>
+            <span class="when">2026, remote</span>
+          </header>
+          <ul>
+            <li>Built an internal developer platform product on open-source tooling: a Next.js control plane, a Go agent on each managed server dialing out over WireGuard with signed self-update, Komodo GitOps, Traefik with automatic TLS, Prometheus, Loki and Grafana, Restic backups. Sixteen repositories, about 130k hand-written lines.</li>
+            <li>Built a Firecracker-based sandbox that runs a real Claude Code session per browser tab: jailer, cgroups v2, a custom seccomp profile, an nftables egress allowlist, 3.2 s cold boot.</li>
+            <li>Ran AI agents as production infrastructure: a service that dispatches headless agents at red CI and verifies the fix by the CI verdict, and a content platform with a Postgres job queue, agent workers, MCP servers and a token-budget guardian.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip txt">Firecracker</span>
+            <span class="chip"><img src="/icons/go.svg" alt="">Go</span>
+            <span class="chip"><img src="/icons/wireguard.svg" alt="">WireGuard</span>
+            <span class="chip"><img src="/icons/terraform.svg" alt="">Terraform</span>
+            <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
+            <span class="chip"><img src="/icons/traefikproxy.svg" alt="">Traefik</span>
+            <span class="chip"><img src="/icons/prometheus.svg" alt="">Prometheus</span>
+            <span class="chip"><img src="/icons/grafana.svg" alt="">Grafana</span>
+            <span class="chip"><img src="/icons/postgresql.svg" alt="">Postgres</span>
+            <span class="chip"><img src="/icons/claude.svg" alt="">Claude Code</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="job">
+        <div class="logo"><img src="/logos/kuik.png" alt="Kuik Digital Solutions"></div>
+        <div>
+          <header>
+            <h3>Platform Engineer &amp; Head of IT</h3>
+            <span class="org">Kuik Digital Solutions</span>
+            <span class="when">2025 to 2026, Bilbao</span>
+          </header>
+          <ul>
+            <li>Migrated deployments from virtual machines to cloud-native, container-based services with Terraform, Ansible and Docker.</li>
+            <li>Built the developer self-service platform: CI/CD pipelines (Jenkins, Komodo), secrets management (1Password), reverse proxy with automatic TLS (Traefik), observability (Prometheus, Loki, Grafana).</li>
+            <li>Ran GitOps across six client environments with Komodo CD, Drone CI, Ansible and Terraform on AWS.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip"><img src="/icons/terraform.svg" alt="">Terraform</span>
+            <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
+            <span class="chip"><img src="/icons/docker.svg" alt="">Docker</span>
+            <span class="chip"><img src="/icons/jenkins.svg" alt="">Jenkins</span>
+            <span class="chip txt">Komodo</span>
+            <span class="chip txt">AWS</span>
+            <span class="chip"><img src="/icons/grafana.svg" alt="">Grafana</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="job">
+        <div class="logo wide"><img src="/logos/naikkan.png" alt="Naikkan"></div>
+        <div>
+          <header>
+            <h3>Bootstrapped founder</h3>
+            <span class="org">Naikkan</span>
+            <span class="when">2024 to 2025, Bilbao</span>
+          </header>
+          <ul>
+            <li>Designed and built a smart dog collar for tracking canine well-being: BLE sensor firmware on an Arduino Nano 33, IMU activity detection pipeline in Python.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip"><img src="/icons/arduino.svg" alt="">Arduino</span>
+            <span class="chip"><img src="/icons/python.svg" alt="">Python</span>
+            <span class="chip txt">BLE</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="job">
+        <div class="logo"><img src="/logos/swisscom.svg" alt="Swisscom"></div>
+        <div>
+          <header>
+            <h3>DevOps Engineer III</h3>
+            <span class="org">Swisscom</span>
+            <span class="when">2023 to 2024, Zurich</span>
+          </header>
+          <ul>
+            <li>Led the migration from traditional Git workflows to GitLab CI/CD with automated pipelines, syntax validation and security scanning.</li>
+            <li>Built Bash tooling collecting 25 KPIs into Prometheus and Grafana; eliminated four recurring critical issues.</li>
+            <li>Designed a proof-of-concept AWS architecture with GitLab and Terraform to replicate on-premise systems on demand from a single commit.</li>
+            <li>Replaced a legacy NetBackup system with a compressed, encrypted, incremental backup pipeline on Bash, cron and S3: 30 TB to 5 TB across 20 clusters, deployments 120 times faster.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip"><img src="/icons/gitlab.svg" alt="">GitLab CI</span>
+            <span class="chip"><img src="/icons/terraform.svg" alt="">Terraform</span>
+            <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
+            <span class="chip"><img src="/icons/gnubash.svg" alt="">Bash</span>
+            <span class="chip"><img src="/icons/prometheus.svg" alt="">Prometheus</span>
+            <span class="chip txt">AWS S3</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="job">
+        <div class="logo"><img src="/logos/motorola.svg" alt="Motorola Solutions"></div>
+        <div>
+          <header>
+            <h3>DevOps Engineer</h3>
+            <span class="org">Motorola Solutions</span>
+            <span class="when">2021 to 2023, Dallas</span>
+          </header>
+          <ul>
+            <li>Provisioned bare metal, NICs and VMs through customer VPNs and orchestrated 100+ Docker containers on 4 to 8 node HA clusters with Ansible. Cut deployment lead time by 90%.</li>
+            <li>Wrote a modular Python CLI suite for operations and incident response, deployed with Ansible to replace ad-hoc shell access on mission-critical infrastructure.</li>
+            <li>Sole technical contact on a six-month on-site pre-sales deployment for a European government tender: from empty racks to high-availability Docker clusters and live demos.</li>
+          </ul>
+          <div class="stack">
+            <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
+            <span class="chip"><img src="/icons/docker.svg" alt="">Docker</span>
+            <span class="chip"><img src="/icons/python.svg" alt="">Python</span>
+            <span class="chip"><img src="/icons/vmware.svg" alt="">VMware</span>
+            <span class="chip"><img src="/icons/redhat.svg" alt="">RHEL</span>
+            <span class="chip txt">F5</span>
+            <span class="chip txt">Bare metal</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="job">
+        <div class="logo"><img src="/logos/satec.svg" alt="SATEC"></div>
+        <div>
+          <header>
+            <h3>Network Engineer, intern</h3>
+            <span class="org">SATEC</span>
+            <span class="when">2019, Bilbao</span>
+          </header>
+          <ul>
+            <li>Audited and remodeled a 50-person branch network, doubling contracted network efficiency.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
   </section>
 </main>
 
-<footer>
-  Bilbao, Spain. Background: Mont Blanc timelapse by <a href="https://www.pexels.com/video/breathtaking-timelapse-of-mont-blanc-summit-37457465/" rel="noopener">Marek Piwnicki</a>.
+<aside>
+  <div class="card">
+    <h2>Skills</h2>
+    <div class="group">
+      <h4>Infrastructure as code</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/terraform.svg" alt="">Terraform, certified</span>
+        <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
+        <span class="chip"><img src="/icons/gnubash.svg" alt="">Bash</span>
+        <span class="chip txt">AWS</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>CI/CD and GitOps</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/githubactions.svg" alt="">GitHub Actions</span>
+        <span class="chip"><img src="/icons/gitlab.svg" alt="">GitLab CI</span>
+        <span class="chip txt">Woodpecker</span>
+        <span class="chip"><img src="/icons/jenkins.svg" alt="">Jenkins</span>
+        <span class="chip txt">Komodo</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>Containers and virtualization</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/docker.svg" alt="">Docker</span>
+        <span class="chip"><img src="/icons/kubernetes.svg" alt="">Kubernetes</span>
+        <span class="chip txt">Firecracker</span>
+        <span class="chip txt">KVM</span>
+        <span class="chip"><img src="/icons/vmware.svg" alt="">VMware</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>Observability</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/prometheus.svg" alt="">Prometheus</span>
+        <span class="chip"><img src="/icons/grafana.svg" alt="">Grafana</span>
+        <span class="chip txt">Loki</span>
+        <span class="chip txt">Alertmanager</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>Systems and networking</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/linux.svg" alt="">Linux</span>
+        <span class="chip"><img src="/icons/wireguard.svg" alt="">WireGuard</span>
+        <span class="chip"><img src="/icons/tailscale.svg" alt="">Tailscale</span>
+        <span class="chip txt">nftables</span>
+        <span class="chip"><img src="/icons/traefikproxy.svg" alt="">Traefik</span>
+        <span class="chip"><img src="/icons/caddy.svg" alt="">Caddy</span>
+        <span class="chip"><img src="/icons/nginx.svg" alt="">NGINX</span>
+        <span class="chip txt">F5</span>
+        <span class="chip txt">Fortinet</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>Data and backup</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/postgresql.svg" alt="">Postgres</span>
+        <span class="chip"><img src="/icons/mariadb.svg" alt="">MariaDB</span>
+        <span class="chip txt">Restic</span>
+        <span class="chip txt">S3 and KMS</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>AI systems</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/claude.svg" alt="">Claude Code</span>
+        <span class="chip"><img src="/icons/anthropic.svg" alt="">Claude API</span>
+        <span class="chip txt">MCP servers</span>
+        <span class="chip txt">Whisper</span>
+        <span class="chip txt">Agent sandboxing</span>
+      </div>
+    </div>
+    <div class="group">
+      <h4>Languages</h4>
+      <div class="stack">
+        <span class="chip"><img src="/icons/gnubash.svg" alt="">Bash</span>
+        <span class="chip"><img src="/icons/python.svg" alt="">Python</span>
+        <span class="chip"><img src="/icons/go.svg" alt="">Go</span>
+        <span class="chip"><img src="/icons/typescript.svg" alt="">TypeScript</span>
+        <span class="chip"><img src="/icons/rust.svg" alt="">Rust</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Education</h2>
+    <div class="edu">
+      <div class="logo"><img src="/logos/illinois-tech.png" alt="Illinois Institute of Technology"></div>
+      <div><strong>MSc Information Technology and Management</strong><span>Illinois Institute of Technology, Chicago. 2020 to 2021. Virtualization, containers, cloud.</span></div>
+    </div>
+    <div class="edu">
+      <div class="logo"><img src="/logos/ehu.svg" alt="University of the Basque Country"></div>
+      <div><strong>MSc Telecommunications Engineering</strong><span>University of the Basque Country, Bilbao. 2019 to 2021. Network design, SDN, IoT.</span></div>
+    </div>
+    <div class="edu">
+      <div class="logo"><img src="/logos/ehu.svg" alt="University of the Basque Country"></div>
+      <div><strong>BSc Telecommunication Technologies Engineering</strong><span>University of the Basque Country, Bilbao. 2015 to 2019. C, Java, networks, cybersecurity.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Languages</h2>
+    <ul class="bars">
+      <li>Spanish, native<div class="bar"><i style="width:100%"></i></div></li>
+      <li>Basque, native<div class="bar"><i style="width:100%"></i></div></li>
+      <li>English, fluent<div class="bar"><i style="width:92%"></i></div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>At a glance</h2>
+    <ul class="facts">
+      <li><span>Based in</span><span>Bilbao, Spain</span></li>
+      <li><span>Citizenship</span><span>Spanish (EU)</span></li>
+      <li><span>Worked in</span><span>US, Switzerland, Spain</span></li>
+      <li><span>Work mode</span><span>Remote or hybrid</span></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<footer class="wrap">
+  Logos belong to their owners. Tech icons by Simple Icons, CC0. Background: Mont Blanc timelapse by Marek Piwnicki, Pexels.
 </footer>
+</div>
 
 <script>
   (function () {
     var v = document.getElementById('hero-video');
-    if (!v) return;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var saveData = navigator.connection && navigator.connection.saveData;
-    var small = window.matchMedia('(max-width: 640px)').matches;
-    if (reduce || saveData || small) { v.remove(); return; }
-    v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true });
-    var p = v.play();
-    if (p && p.catch) { p.catch(function () { v.remove(); }); }
+    if (v) {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var saveData = navigator.connection && navigator.connection.saveData;
+      var small = window.matchMedia('(max-width: 640px)').matches;
+      if (reduce || saveData || small) { v.remove(); }
+      else {
+        v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true });
+        var p = v.play(); if (p && p.catch) { p.catch(function () { v.remove(); }); }
+      }
+    }
+    var intro = document.getElementById('intro');
+    var band = document.getElementById('band');
+    var spacer = document.querySelector('.spacer');
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var range = Math.max(1, spacer.offsetHeight);
+      var p = Math.min(1, Math.max(0, window.scrollY / range));
+      intro.style.opacity = String(1 - Math.min(1, p * 1.6));
+      intro.style.transform = 'translateY(' + (-p * 60) + 'px)';
+      intro.classList.toggle('is-gone', p > 0.6);
+      band.classList.toggle('is-on', p > 0.55);
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 </script>
 </body>
