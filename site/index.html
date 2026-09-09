@@ -21,7 +21,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" as="image" href="/media/hero-poster.jpg">
+<link rel="preload" as="image" href="/media/hero-poster-1920.webp" media="(min-width: 901px)">
+<link rel="preload" as="image" href="/media/hero-poster-1280.webp" media="(max-width: 900px)">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Mikel Martin","jobTitle":"DevOps / Platform Engineer","url":"https://mikel-martin.com/","image":"https://mikel-martin.com/media/portrait.jpg","address":{"@type":"PostalAddress","addressLocality":"Bilbao","addressCountry":"ES"},"sameAs":["https://github.com/mikelm20","https://www.linkedin.com/in/mikelm20"]}
 </script>
@@ -55,7 +56,7 @@
   .band {
     position: relative;
     isolation: isolate;
-    background: var(--bg) url("/media/hero-poster.jpg") center 35% / cover no-repeat;
+    background: var(--bg) url("/media/hero-poster-1920.webp") center 35% / cover no-repeat;
     min-height: 22rem;
     display: flex;
     flex-direction: column;
@@ -133,7 +134,7 @@
   aside h2 { margin-bottom: 0.9rem; }
   .group { margin-top: 0.9rem; }
   .group:first-of-type { margin-top: 0; }
-  .group h4 { margin: 0 0 0.45rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+  .group h3 { margin: 0 0 0.45rem; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
   .group .stack { margin-top: 0; }
   .edu { display: grid; grid-template-columns: 4.6rem 1fr; gap: 0.9rem; align-items: start; }
   .edu + .edu { margin-top: 1.1rem; }
@@ -182,7 +183,8 @@
 
   /* Root page: fixed video background, hero intro, sticky band */
   html { scroll-behavior: smooth; }
-  .bg { position: fixed; inset: 0; z-index: 0; background: var(--bg) url("/media/hero-poster.jpg") center / cover no-repeat; }
+  .bg { position: fixed; inset: 0; z-index: 0; background: var(--bg) url("/media/hero-poster-1920.webp") center / cover no-repeat; }
+  @media (max-width: 900px) { .bg { background-image: url("/media/hero-poster-1280.webp"); } }
   .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
   .bg video.is-ready { opacity: 1; }
   .bg .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,15,20,0.3) 0%, rgba(11,15,20,0.12) 45%, rgba(11,15,20,0.55) 100%); }
@@ -218,9 +220,7 @@
 <body>
 
 <div class="bg" aria-hidden="true">
-  <video id="hero-video" muted playsinline loop autoplay preload="metadata" poster="/media/hero-poster.jpg" disablepictureinpicture>
-    <source src="/media/hero-2160.mp4" type="video/mp4" media="(min-width: 1921px)">
-    <source src="/media/hero-1080.mp4" type="video/mp4">
+  <video id="hero-video" muted playsinline loop preload="none" disablepictureinpicture data-src="/media/hero-1080.mp4" data-src-4k="/media/hero-2160.mp4">
   </video>
   <div class="shade"></div>
 </div>
@@ -248,7 +248,7 @@
   </div>
   <div class="wrap id">
     <div class="who">
-      <img class="portrait" src="/media/portrait.jpg" alt="Mikel Martin" width="512" height="512" loading="lazy">
+      <img class="portrait" src="/media/portrait-256.webp" alt="Mikel Martin" width="256" height="256" loading="lazy">
       <div>
         <h1>Mikel Martin</h1>
         <p class="role">DevOps / Platform Engineer</p>
@@ -417,7 +417,7 @@
   <div class="card">
     <h2>Skills</h2>
     <div class="group">
-      <h4>Infrastructure as code</h4>
+      <h3>Infrastructure as code</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/terraform.svg" alt="">Terraform, certified</span>
         <span class="chip"><img src="/icons/ansible.svg" alt="">Ansible</span>
@@ -426,7 +426,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>CI/CD and GitOps</h4>
+      <h3>CI/CD and GitOps</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/githubactions.svg" alt="">GitHub Actions</span>
         <span class="chip"><img src="/icons/gitlab.svg" alt="">GitLab CI</span>
@@ -436,7 +436,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>Containers and virtualization</h4>
+      <h3>Containers and virtualization</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/docker.svg" alt="">Docker</span>
         <span class="chip"><img src="/icons/kubernetes.svg" alt="">Kubernetes</span>
@@ -446,7 +446,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>Observability</h4>
+      <h3>Observability</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/prometheus.svg" alt="">Prometheus</span>
         <span class="chip"><img src="/icons/grafana.svg" alt="">Grafana</span>
@@ -455,7 +455,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>Systems and networking</h4>
+      <h3>Systems and networking</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/linux.svg" alt="">Linux</span>
         <span class="chip"><img src="/icons/wireguard.svg" alt="">WireGuard</span>
@@ -469,7 +469,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>Data and backup</h4>
+      <h3>Data and backup</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/postgresql.svg" alt="">Postgres</span>
         <span class="chip"><img src="/icons/mariadb.svg" alt="">MariaDB</span>
@@ -478,7 +478,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>AI systems</h4>
+      <h3>AI systems</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/claude.svg" alt="">Claude Code</span>
         <span class="chip"><img src="/icons/openrouter.svg" alt="">OpenRouter</span>
@@ -487,7 +487,7 @@
       </div>
     </div>
     <div class="group">
-      <h4>Languages</h4>
+      <h3>Languages</h3>
       <div class="stack">
         <span class="chip"><img src="/icons/gnubash.svg" alt="">Bash</span>
         <span class="chip"><img src="/icons/python.svg" alt="">Python</span>
@@ -548,6 +548,9 @@
       if (reduce || saveData || small) { v.remove(); }
       else {
         v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true });
+        v.poster = '/media/hero-poster-1920.webp';
+        v.src = window.innerWidth > 1920 ? v.getAttribute('data-src-4k') : v.getAttribute('data-src');
+        v.load();
         var p = v.play(); if (p && p.catch) { p.catch(function () { v.remove(); }); }
       }
     }
