@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mikel Martin</title>
-<meta name="description" content="Telecom engineer turned platform engineer. Runs infrastructure, builds with AI agents.">
+<meta name="description" content="Telecom engineer building and running platforms for developers and agents.">
 <meta property="og:title" content="Mikel Martin">
-<meta property="og:description" content="Telecom engineer turned platform engineer. Runs infrastructure, builds with AI agents.">
+<meta property="og:description" content="Telecom engineer building and running platforms for developers and agents.">
 <meta property="og:image" content="https://mikel-martin.com/media/hero-poster.jpg">
 <meta name="theme-color" content="#0b0f14">
 <link rel="preload" as="image" href="/media/hero-poster.jpg">
@@ -158,10 +158,12 @@
   .bg { position: fixed; inset: 0; z-index: 0; background: var(--bg) url("/media/hero-poster.jpg") center / cover no-repeat; }
   .bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
   .bg video.is-ready { opacity: 1; }
-  .bg .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,15,20,0.35) 0%, rgba(11,15,20,0.15) 40%, rgba(11,15,20,0.55) 100%); }
+  .bg .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,15,20,0.4) 0%, rgba(11,15,20,0.25) 45%, rgba(11,15,20,0.6) 100%); }
   .intro { position: fixed; inset: 0; z-index: 1; display: grid; place-items: center; text-align: center; padding: 0 1.5rem; will-change: opacity, transform; }
-  .intro h1 { margin: 0 0 0.6rem; font-size: clamp(2.6rem, 7vw, 5.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; text-shadow: 0 2px 24px rgba(0,0,0,0.45); }
-  .intro .lede { margin: 0 auto 2rem; max-width: 38rem; font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--muted); text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .intro h1 { margin: 0 0 0.6rem; font-size: clamp(2.6rem, 7vw, 5.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; text-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 4px 30px rgba(0,0,0,0.55); }
+  .intro > div { position: relative; padding: 2rem 1rem; }
+  .intro > div::before { content: ""; position: absolute; inset: -30% -25%; z-index: -1; background: radial-gradient(ellipse at center, rgba(11,15,20,0.62) 0%, rgba(11,15,20,0.35) 45%, rgba(11,15,20,0) 72%); pointer-events: none; }
+  .intro .lede { margin: 0 auto 2rem; max-width: 40rem; font-size: clamp(1.1rem, 2.2vw, 1.45rem); color: var(--fg); text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 2px 18px rgba(0,0,0,0.6); }
   .intro .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
   .intro .links a { padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(11,15,20,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 0.95rem; }
   .intro .links a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
@@ -193,7 +195,7 @@
 <div class="intro" id="intro">
   <div>
     <h1>Mikel Martin</h1>
-    <p class="lede">Telecom engineer turned platform engineer. Runs infrastructure, builds with AI agents.</p>
+    <p class="lede">Telecom engineer building and running platforms for developers and agents.</p>
     <nav class="links" aria-label="Primary">
       <a class="primary" href="#band">About me</a>
       <a href="https://github.com/mikelm20" rel="me">GitHub</a>
