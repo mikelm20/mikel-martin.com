@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mikel-martin.com/sitemap.xml
