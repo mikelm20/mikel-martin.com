@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects · Mikel Martin</title>
+<meta name="description" content="Products and systems built by Mikel Martin.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0f14">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #0b0f14; --bg-2: #10161e; --panel: rgba(255,255,255,0.035); --fg: #f2f4f7;
+    --muted: rgba(242,244,247,0.66); --line: rgba(242,244,247,0.14); --blue: #8ec5ff; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(100% - 3rem, 68rem); margin: 0 auto; }
+  @media (max-width: 600px) { .wrap { width: calc(100% - 2rem); } }
+
+  .topnav { padding: 1.4rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1.4rem; }
+  .topnav .brand { font-weight: 600; letter-spacing: -0.01em; }
+  .topnav nav { display: flex; gap: 1.4rem; }
+  .topnav a { font-size: 0.95rem; font-weight: 500; color: var(--fg); }
+  .topnav nav a:not(.current) { color: var(--muted); }
+  .topnav a:hover { color: var(--fg); }
+  .topnav a { white-space: nowrap; }
+  @media (max-width: 600px) { .topnav { padding: 1.1rem 1rem; } .topnav .brand { display: none; } .topnav nav { gap: 1.1rem; width: 100%; justify-content: flex-end; } }
+
+  header.page { padding: 3rem 0 1.5rem; }
+  header.page h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 650; letter-spacing: -0.025em; line-height: 1.05; }
+  header.page p { margin: 0.8rem 0 0; color: var(--muted); max-width: 44rem; text-align: justify; hyphens: auto; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; padding: 1rem 0 5rem; }
+  @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
+  .card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); overflow: hidden; transition: border-color 0.15s ease, transform 0.15s ease; }
+  .card:hover { border-color: rgba(242,244,247,0.3); transform: translateY(-2px); }
+  .shot { aspect-ratio: 16 / 10; background: var(--bg-2); display: grid; place-items: center; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .body { padding: 1.1rem 1.2rem 1.25rem; display: flex; flex-direction: column; gap: 0.55rem; flex: 1; }
+  .card h2 { margin: 0; font-size: 1.15rem; font-weight: 650; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; text-align: justify; hyphens: auto; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.5rem; }
+  .tag { font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0.18rem 0.6rem; }
+  .status { font-size: 0.78rem; color: var(--blue); }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="brand" href="/">Mikel Martin</a>
+  <nav>
+    <a href="/#band">About me</a>
+    <a class="current" href="/projects">Projects</a>
+    <a href="https://github.com/mikelm20" rel="me">GitHub</a>
+    <a href="https://www.linkedin.com/in/mikelm20" rel="me">LinkedIn</a>
+  </nav>
+</div>
+
+<div class="wrap">
+  <header class="page">
+    <h1>Projects</h1>
+    <p>Products and systems I have built and run, from a SaaS in production to a piece of hardware. Each one gets its own page with screenshots and a walkthrough.</p>
+  </header>
+
+  <div class="cards">
+
+    <article class="card" id="still">
+      <div class="shot">Screenshots soon</div>
+      <div class="body">
+        <h2>Still</h2>
+        <p>Career development for restaurant teams. Frontline staff see the roles above them, what each one requires, and a plan that tracks material, quizzes, certifications and one-to-ones toward the next step. Mobile-first, multi-tenant, in production.</p>
+        <div class="tags"><span class="tag">SaaS</span><span class="tag">Web</span><span class="tag">Mobile-first</span><span class="tag">Billing</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+    <article class="card" id="platform">
+      <div class="shot">Screenshots soon</div>
+      <div class="body">
+        <h2>Developer platform</h2>
+        <p>Push to deploy in sixty seconds for small software teams. A control plane, an agent on every server, GitOps, automatic HTTPS, monitoring and backups that get restored, on the team's own machines.</p>
+        <div class="tags"><span class="tag">Platform</span><span class="tag">Control plane</span><span class="tag">Agents</span><span class="tag">GitOps</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+    <article class="card" id="workforce">
+      <div class="shot">Screenshots soon</div>
+      <div class="body">
+        <h2>Workforce ops</h2>
+        <p>Scheduling, talent and team communications for quick-service restaurant franchises. A constraint solver drafts shifts that comply with labor rules, delivered as a web console and an iOS app.</p>
+        <div class="tags"><span class="tag">SaaS</span><span class="tag">iOS</span><span class="tag">Solver</span><span class="tag">Multi-tenant</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+    <article class="card" id="newsroom">
+      <div class="shot">Screenshots soon</div>
+      <div class="body">
+        <h2>Social newsroom</h2>
+        <p>From news feed to published post. Ingests stories, clusters and ranks them, drafts platform-specific copy, renders branded image cards, routes everything through a human approval queue and schedules publication.</p>
+        <div class="tags"><span class="tag">Automation</span><span class="tag">Content</span><span class="tag">Approval flow</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+    <article class="card" id="naikkan">
+      <div class="shot">Photos soon</div>
+      <div class="body">
+        <h2>Naikkan</h2>
+        <p>A smart collar for dog well-being. Sensor firmware over Bluetooth Low Energy on an Arduino Nano 33 and an activity detection pipeline that turns motion data into a daily picture of the dog.</p>
+        <div class="tags"><span class="tag">Hardware</span><span class="tag">BLE</span><span class="tag">Firmware</span><span class="tag">Signal processing</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+    <article class="card" id="nolan">
+      <div class="shot">Screenshots soon</div>
+      <div class="body">
+        <h2>Nolan</h2>
+        <p>A desktop platform for natural-language software development. A fleet of named agents works on a project, each in its own terminal and worktree, surfaced in one live dashboard.</p>
+        <div class="tags"><span class="tag">Desktop</span><span class="tag">Rust</span><span class="tag">Agents</span><span class="tag">Dashboard</span></div>
+        <span class="status">Page coming</span>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<footer><div class="wrap">Screenshots and walkthroughs are being prepared. Nothing here is a client name or a private detail.</div></footer>
+
+</body>
+</html>
