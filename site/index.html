@@ -136,6 +136,17 @@
 
   footer { color: var(--muted); font-size: 0.85rem; padding: 0 0 3rem; }
 
+  .sheet p, .sheet li, .band .meta { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  @media (max-width: 600px) {
+    .wrap { width: calc(100% - 2rem); }
+    .job { grid-template-columns: 5.4rem 1fr; gap: 0.9rem 1rem; }
+    .job > div:not(.logo) { display: contents; }
+    .job .logo { width: 5.4rem; height: 3.2rem; align-self: center; }
+    .job header { grid-column: 2; align-self: center; }
+    .job ul, .job .stack { grid-column: 1 / -1; }
+    .job ul { margin-top: 0; padding-left: 1rem; }
+    .job .stack { margin-top: 0; }
+  }
   @media (max-width: 900px) {
     .grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .pills { margin-left: 0; }
