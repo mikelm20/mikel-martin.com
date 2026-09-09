@@ -61,6 +61,7 @@
   .id h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 650; letter-spacing: -0.025em; line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
   .id .role { margin: 0.5rem 0 0; font-size: 1.2rem; color: var(--fg); opacity: 0.9; }
   .id .meta { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  .id .meta a { color: var(--fg); border-bottom: 1px solid var(--line); }
   .pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-left: auto; }
   .pill {
     display: inline-flex; align-items: center; gap: 0.45rem;
@@ -163,17 +164,19 @@
   .intro h1 { margin: 0 0 0.6rem; font-size: clamp(2.6rem, 7vw, 5.5rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; text-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 4px 30px rgba(0,0,0,0.55); }
   .intro > div { position: relative; padding: 2rem 1rem; }
   .intro > div::before { content: ""; position: absolute; inset: -12% -8%; z-index: -1; background: radial-gradient(ellipse at center, rgba(11,15,20,0.28) 0%, rgba(11,15,20,0.12) 45%, rgba(11,15,20,0) 68%); pointer-events: none; }
-  .intro .lede { margin: 0 auto 2rem; max-width: 40rem; font-size: clamp(1.1rem, 2.2vw, 1.45rem); color: var(--fg); text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 2px 18px rgba(0,0,0,0.6); }
-  .intro .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
-  .intro .links a { padding: 0.7rem 1.2rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(11,15,20,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 0.95rem; }
-  .intro .links a.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-  .intro .links a.primary:hover { background: var(--blue); border-color: var(--blue); }
+  .intro .lede { margin: 0 auto; max-width: none; font-size: clamp(1rem, 1.6vw, 1.35rem); color: var(--fg); text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 2px 18px rgba(0,0,0,0.6); }
+  @media (min-width: 760px) { .intro .lede { white-space: nowrap; } }
+  .intro .topnav { position: absolute; top: 0; left: 0; right: 0; padding: 1.4rem 0; }
+  .intro .topnav .wrap { display: flex; justify-content: flex-end; gap: 1.4rem; }
+  .intro .topnav a { color: var(--fg); font-size: 0.95rem; font-weight: 500; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+  .intro .topnav a:hover { color: var(--blue); }
   .intro .hint { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
   .intro.is-gone { pointer-events: none; }
   .spacer { height: calc(100svh - 22rem); }
   .band { position: relative; z-index: 3; height: 22rem; min-height: 0; background: none; }
   .band::after { background: linear-gradient(180deg, rgba(11,15,20,0) 0%, rgba(11,15,20,0.15) 45%, var(--bg) 100%); opacity: var(--p, 0); }
   .band { scroll-margin-top: 0; }
+  .band .top { justify-content: flex-end; }
   .band .top, .band .id { opacity: 0; transition: opacity 0.25s linear; }
   .band .id { align-items: center; }
   .band .who { display: flex; align-items: center; gap: 1.4rem; }
@@ -197,13 +200,13 @@
 </div>
 
 <div class="intro" id="intro">
+  <nav class="topnav" aria-label="Primary"><div class="wrap">
+    <a href="#band">About me</a>
+    <a href="https://github.com/mikelm20" rel="me">GitHub</a>
+  </div></nav>
   <div>
     <h1>Mikel Martin</h1>
     <p class="lede">Telecom engineer building and running platforms for developers and agents.</p>
-    <nav class="links" aria-label="Primary">
-      <a class="primary" href="#band">About me</a>
-      <a href="https://github.com/mikelm20" rel="me">GitHub</a>
-    </nav>
   </div>
   <div class="hint" aria-hidden="true">Scroll</div>
 </div>
@@ -212,7 +215,6 @@
 
 <header class="band" id="band">
   <div class="wrap top">
-    <a href="/">Mikel Martin</a>
     <nav>
       <a href="https://github.com/mikelm20" rel="me">GitHub</a>
     </nav>
@@ -223,7 +225,7 @@
       <div>
         <h1>Mikel Martin</h1>
         <p class="role">DevOps / Platform Engineer</p>
-        <p class="meta">Bilbao, Spain. Remote-friendly. Contact through GitHub.</p>
+        <p class="meta">Bilbao, Spain. Remote-friendly. Contact through <a href="https://www.linkedin.com/in/mikelm20" rel="me">LinkedIn</a>.</p>
       </div>
     </div>
     <div class="pills">
