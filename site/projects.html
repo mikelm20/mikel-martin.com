@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects · Mikel Martin</title>
 <meta name="description" content="Products and systems built by Mikel Martin.">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b0f14">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png">
@@ -48,6 +47,12 @@
   .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.5rem; }
   .tag { font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 0.18rem 0.6rem; }
   .status { font-size: 0.78rem; color: var(--blue); }
+  .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 2rem; }
+  @media (max-width: 700px) { .cards.two { grid-template-columns: 1fr; } }
+  .shot.diagram { aspect-ratio: 4 / 3; background: #FAFAF8; }
+  .shot.diagram img { object-fit: contain; }
+  h2.group { margin: 1.5rem 0 0; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  a.status:hover { text-decoration: underline; }
 
   footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.85rem; }
 </style>
@@ -67,9 +72,54 @@
 <div class="wrap">
   <header class="page">
     <h1>Projects</h1>
-    <p>Products and systems I have built and run, from a SaaS in production to a piece of hardware. Each one gets its own page with screenshots and a walkthrough.</p>
+    <p>Infrastructure I have designed and built, with architecture diagrams, and the products I have run. The first four are the best picture of how I work; three of them are open source.</p>
   </header>
 
+  <h2 class="group">Infrastructure</h2>
+  <div class="cards two">
+
+    <article class="card" id="reference-platform">
+      <div class="shot diagram"><img src="/media/projects/reference-platform.webp" alt="Architecture diagram: a core server running CI, deploys and observability, and separate dev and production servers joined by an overlay network" width="1200" height="900" loading="lazy"></div>
+      <div class="body">
+        <h2>Reference platform for small software teams</h2>
+        <p>The platform I set up for small software teams on bare metal: a core server running CI, GitOps deploys and monitoring with alerts; separate dev and production servers, each with a deploy agent and a secrets agent, joined by an encrypted overlay network behind a reverse proxy with automatic TLS; encrypted backups from production. Everything in Docker and defined as code.</p>
+        <div class="tags"><span class="tag">Bare metal</span><span class="tag">GitOps</span><span class="tag">Docker</span><span class="tag">Observability</span><span class="tag">Backups</span></div>
+      </div>
+    </article>
+
+    <article class="card" id="devops-agent">
+      <div class="shot diagram"><img src="/media/projects/devops-agent.webp" alt="Architecture diagram: a Go agent on a server behind a customer firewall dials out over WireGuard to a control plane" width="1200" height="900" loading="lazy"></div>
+      <div class="body">
+        <h2>devops-agent</h2>
+        <p>A Go agent for servers inside networks you don't control. It only dials out, over WireGuard, and never opens an inbound port. Allowlisted commands with no shell, GitOps apply with health checks and automatic rollback, signed self-updates that can undo themselves, and Prometheus metrics.</p>
+        <div class="tags"><span class="tag">Go</span><span class="tag">WireGuard</span><span class="tag">GitOps</span><span class="tag">Security</span></div>
+        <a class="status" href="https://github.com/mikelm20/devops-agent" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <article class="card" id="microvm-terminal">
+      <div class="shot diagram"><img src="/media/projects/microvm-terminal.webp" alt="Architecture diagram: one Firecracker microVM per session inside jailer, cgroups and seccomp layers, with an nftables egress allowlist" width="1200" height="900" loading="lazy"></div>
+      <div class="body">
+        <h2>microvm-terminal</h2>
+        <p>One Firecracker microVM per user session, booted in about 3 seconds and destroyed on exit or idle, to run an AI coding agent safely. Layered isolation: jailer, cgroups v2, a custom seccomp filter and an nftables egress allowlist that lets out only DNS, the AI API and package mirrors.</p>
+        <div class="tags"><span class="tag">Firecracker</span><span class="tag">KVM</span><span class="tag">Go</span><span class="tag">Isolation</span></div>
+        <a class="status" href="https://github.com/mikelm20/microvm-terminal" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+    <article class="card" id="devops-guardian">
+      <div class="shot diagram"><img src="/media/projects/devops-guardian.webp" alt="Architecture diagram: a controller watches CI across repos and dispatches one agent to fix a red build, then verifies CI on the fix" width="1200" height="900" loading="lazy"></div>
+      <div class="body">
+        <h2>devops-guardian</h2>
+        <p>Keeps the main branch of several repositories green. When CI turns red, a controller sends one headless agent into a clean worktree to fix it, then trusts only the CI verdict on that fix. Built after the naive version failed with several agents and people pushing to the same branch.</p>
+        <div class="tags"><span class="tag">CI/CD</span><span class="tag">Python</span><span class="tag">AI agents</span></div>
+        <a class="status" href="https://github.com/mikelm20/devops-guardian" rel="noopener">View on GitHub</a>
+      </div>
+    </article>
+
+  </div>
+
+  <h2 class="group">Products</h2>
   <div class="cards">
 
     <article class="card" id="still">
