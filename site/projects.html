@@ -53,6 +53,11 @@
   .shot.diagram img { object-fit: contain; }
   h2.group { margin: 1.5rem 0 0; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
   a.status:hover { text-decoration: underline; }
+  .products { list-style: none; margin: 1rem 0 5rem; padding: 0; border-top: 1px solid var(--line); }
+  .products li { padding: 1.1rem 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 12rem 1fr; gap: 1.5rem; }
+  .products h3 { margin: 0; font-size: 1.05rem; font-weight: 650; }
+  .products p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 600px) { .products li { grid-template-columns: 1fr; gap: 0.3rem; } }
 
   footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.85rem; }
 </style>
@@ -72,7 +77,7 @@
 <div class="wrap">
   <header class="page">
     <h1>Projects</h1>
-    <p>Infrastructure I have designed and built, with architecture diagrams, and the products I have run. The first four are the best picture of how I work; three of them are open source.</p>
+    <p>Infrastructure I have designed and built, with architecture diagrams, and other software I have built. The first four are the best picture of how I work; three of them are open source.</p>
   </header>
 
   <h2 class="group">Infrastructure</h2>
@@ -119,73 +124,17 @@
 
   </div>
 
-  <h2 class="group">Products</h2>
-  <div class="cards">
-
-    <article class="card" id="still">
-      <div class="shot">Screenshots soon</div>
-      <div class="body">
-        <h2>Still</h2>
-        <p>Career development for restaurant teams. Frontline staff see the roles above them, what each one requires, and a plan that tracks material, quizzes, certifications and one-to-ones toward the next step. Mobile-first, multi-tenant, in production.</p>
-        <div class="tags"><span class="tag">SaaS</span><span class="tag">Web</span><span class="tag">Mobile-first</span><span class="tag">Billing</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-    <article class="card" id="platform">
-      <div class="shot">Screenshots soon</div>
-      <div class="body">
-        <h2>Developer platform</h2>
-        <p>Push-to-deploy for small software teams, on the team's own machines. A control plane, an agent on every server, GitOps, automatic HTTPS, monitoring and backups.</p>
-        <div class="tags"><span class="tag">Platform</span><span class="tag">Control plane</span><span class="tag">Agents</span><span class="tag">GitOps</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-    <article class="card" id="workforce">
-      <div class="shot">Screenshots soon</div>
-      <div class="body">
-        <h2>Workforce ops</h2>
-        <p>Scheduling, talent and team communications for quick-service restaurant franchises. A constraint solver drafts shifts that comply with labor rules, delivered as a web console and an iOS app.</p>
-        <div class="tags"><span class="tag">SaaS</span><span class="tag">iOS</span><span class="tag">Solver</span><span class="tag">Multi-tenant</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-    <article class="card" id="newsroom">
-      <div class="shot">Screenshots soon</div>
-      <div class="body">
-        <h2>Social newsroom</h2>
-        <p>From news feed to published post. Ingests stories, clusters and ranks them, drafts platform-specific copy, renders branded image cards, routes everything through a human approval queue and schedules publication.</p>
-        <div class="tags"><span class="tag">Automation</span><span class="tag">Content</span><span class="tag">Approval flow</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-    <article class="card" id="naikkan">
-      <div class="shot">Photos soon</div>
-      <div class="body">
-        <h2>Naikkan</h2>
-        <p>A smart collar for dog well-being. Sensor firmware over Bluetooth Low Energy on an Arduino Nano 33 and an activity detection pipeline that turns motion data into a daily picture of the dog.</p>
-        <div class="tags"><span class="tag">Hardware</span><span class="tag">BLE</span><span class="tag">Firmware</span><span class="tag">Signal processing</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-    <article class="card" id="nolan">
-      <div class="shot">Screenshots soon</div>
-      <div class="body">
-        <h2>Nolan</h2>
-        <p>A desktop platform for natural-language software development. A fleet of named agents works on a project, each in its own terminal and worktree, surfaced in one live dashboard.</p>
-        <div class="tags"><span class="tag">Desktop</span><span class="tag">Rust</span><span class="tag">Agents</span><span class="tag">Dashboard</span></div>
-        <span class="status">Page coming</span>
-      </div>
-    </article>
-
-  </div>
+  <h2 class="group">Other software I have built</h2>
+  <ul class="products">
+    <li><h3>Still</h3><p>Career development for restaurant teams. Frontline staff see the roles above them, what each one requires, and a plan that tracks material, quizzes, certifications and one-to-ones toward the next step. Mobile-first, multi-tenant, in production.</p></li>
+    <li><h3>Developer platform</h3><p>Push-to-deploy for small software teams, on the team's own machines. A control plane, an agent on every server, GitOps, automatic HTTPS, monitoring and backups.</p></li>
+    <li><h3>Workforce ops</h3><p>Scheduling, talent and team communications for quick-service restaurant franchises. A constraint solver drafts shifts that comply with labor rules, delivered as a web console and an iOS app.</p></li>
+    <li><h3>Social newsroom</h3><p>From news feed to published post. Ingests stories, clusters and ranks them, drafts platform-specific copy, renders branded image cards, routes everything through a human approval queue and schedules publication.</p></li>
+    <li><h3>Nolan</h3><p>A desktop platform for natural-language software development. A fleet of named agents works on a project, each in its own terminal and worktree, surfaced in one live dashboard.</p></li>
+  </ul>
 </div>
 
-<footer><div class="wrap">Screenshots and walkthroughs are being prepared. Nothing here is a client name or a private detail.</div></footer>
+<footer><div class="wrap">Nothing here is a client name or a private detail.</div></footer>
 
 </body>
 </html>
